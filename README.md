@@ -1,6 +1,5 @@
-# OlistDataPipeline
 
-## Olist E-Commerce Data Pipeline (PySpark + Delta Lake)
+# Olist E-Commerce Data Pipeline (PySpark + Delta Lake)
 
 This project implements a full data engineering pipeline using PySpark and Delta Lake, based on the Olist Brazilian E-Commerce dataset. It follows the Medallion Architecture: **Bronze → Silver → Gold**.
 
