@@ -6,7 +6,7 @@ This project implements a full data engineering pipeline using PySpark and Delta
 
 ##  Project Structure
 
-![Example Image](https://github.com/SaraBallkoci/OlistDataPipeline/blob/main/capture.PNG)
+![Example Image](https://github.com/SaraBallkoci/OlistDataPipeline/blob/main/project-root/Capture.PNG)
 
 
 ## The project does the following:
