@@ -1,33 +1,49 @@
+# Olist E-Commerce Data Pipeline (SQL Server)
 
-# Olist E-Commerce Data Pipeline (PySpark + Delta Lake)
+This project implements a full data engineering pipeline in **Microsoft SQL Server** using the Olist Brazilian E-Commerce dataset. It follows the **Medallion Architecture**: Bronze → Silver → Gold, using T-SQL for ingestion, transformation, and analytics.
 
-This project implements a full data engineering pipeline using PySpark and Delta Lake, based on the Olist Brazilian E-Commerce dataset. It follows the Medallion Architecture: **Bronze → Silver → Gold**.
+---
 
-##  Project Structure
+## Project Layers
 
-![Example Image](https://github.com/SaraBallkoci/OlistDataPipeline/blob/main/project-root/Capture.PNG)
+### Bronze Layer: Raw Ingestion
+- Raw CSVs imported using SSMS Import Wizard.
+- `order_purchase_date` used for partitioning via `PARTITION FUNCTION` and `PARTITION SCHEME`.
+- Data stored in `[bronze]` schema.
+- Cleaned using `DELETE` and `ROW_NUMBER()` to remove nulls and duplicates.
 
+### Silver Layer: Enriched Data
+- Data joined from multiple bronze tables (orders, items, payments).
+- Added columns:
+  - `total_price = price + freight_value`
+  - `profit_margin = price - freight_value`
+  - `delivery_time_days = DATEDIFF(...)`
+  - `payment_count = SUM(payment_installments)`
+- Output stored in `[silver].orders_enriched`, partitioned by `order_purchase_date`.
 
-## The project does the following:
+### Gold Layer: Analytics & KPIs
+- Window and aggregation functions used to create:
+  - `cumulative_sales_customer`: running total of total_price per customer.
+  - `rolling_avg_delivery_time_category`: 3-row rolling average by category.
+  - `kpi_summary`: sales, delivery times, and order counts grouped by seller, product, and region.
+- Results stored in `[gold]` schema.
 
-- **Bronze Layer**: Loads raw CSVs, parses timestamps, partitions orders by date and saves data to delta tables .
-- **Silver Layer**: Joins and enriches data (products, sellers, customers, etc.), adds calculated columns, and cleans the dataset.
-- **Gold Layer**: Creates analytical tables with:
-  -  Cumulative sales per customer
-  -  Rolling average delivery time per category
-  -  KPI summary by seller, category, and state
-- **SQL Reporting**: Runs queries to extract business insights.
+---
 
-## Dataset
+## Reporting Queries
 
-[Kaggle - Olist Brazilian E-Commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+Sample insights delivered:
+- Total sales per product category
+- Average delivery time per seller
+- Order counts per customer state
+
+---
 
 ## Requirements
 
-- Python 3.10.18
-- PySpark 4.0.0
-- Delta Lake
-- openjdk 17.0.15
-- Jupyter Notebooks
+- Microsoft SQL Server (Express or Developer Edition)
+- SQL Server Management Studio (SSMS)
+- Olist Dataset from [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 
+---
 

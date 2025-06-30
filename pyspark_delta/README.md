@@ -3,10 +3,6 @@
 
 This project implements a full data engineering pipeline using PySpark and Delta Lake, based on the Olist Brazilian E-Commerce dataset. It follows the Medallion Architecture: **Bronze → Silver → Gold**.
 
-##  Project Structure
-
-![Example Image](https://github.com/SaraBallkoci/OlistDataPipeline/blob/main/project-root/Capture.PNG)
-
 
 ## The project does the following:
 
