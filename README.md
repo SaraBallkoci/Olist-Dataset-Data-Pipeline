@@ -27,7 +27,7 @@ Two implementation approaches are provided:
 
 ## Method 2: Microsoft SQL Server (T-SQL)
 
-- **Bronze Layer**: Raw CSVs imported into SQL Server via SSMS or `BULK INSERT`. Partitioned tables created using `PARTITION FUNCTION` and `PARTITION SCHEME`.
+- **Bronze Layer**: Raw CSVs imported into SQL Server via SSMS. Partitioned tables created using `PARTITION FUNCTION` and `PARTITION SCHEME`.
 - **Silver Layer**: Cleaned and enriched data using joins and computed columns (`total_price`, `delivery_time`, `profit_margin`, etc.).
 - **Gold Layer**: Aggregated views using `SUM() OVER`, `AVG() OVER`, and `GROUP BY` to generate cumulative metrics and KPIs.
 - **Reporting Queries**: Standard T-SQL used to extract total sales, average delivery times, and order counts by region.
@@ -43,6 +43,3 @@ Two implementation approaches are provided:
 [Kaggle - Olist Brazilian E-Commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
 
 ---
-
-## Project Structure
-
